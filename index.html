@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Okinawa 2026｜Jerry Trip</title>
+
+<style>
+  :root{
+    --text:#111827;
+    --muted:#6b7280;
+    --line:#e5e7eb;
+    --bg:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, "Noto Sans TC","PingFang TC","Microsoft JhengHei", sans-serif;
+    color:var(--text);
+    background:var(--bg);
+  }
+
+  /* ===== Top header ===== */
+  header{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(255,255,255,.86);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .top{
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 14px 16px 10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    gap:10px;
+  }
+  .icons{
+    display:flex;
+    gap:10px;
+  }
+  .iconBtn{
+    width:38px;height:38px;
+    border-radius:8px;
+    border:1px solid var(--line);
+    background:#fff;
+    display:grid;
+    place-items:center;
+    cursor:pointer;
+    user-select:none;
+    transition: transform .12s ease;
+  }
+  .iconBtn:hover{ transform: translateY(-1px); }
+  .brand{
+    font-weight:800;
+    letter-spacing:.08em;
+    font-size: 14px;
+    color:#111;
+  }
+
+  nav{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    gap:26px;
+    padding: 10px 10px 14px;
+    flex-wrap:wrap;
+    border-top: 1px solid var(--line);
+  }
+  nav a{
+    text-decoration:none;
+    color: var(--muted);
+    font-weight:700;
+    font-size: 12px;
+    letter-spacing:.08em;
+    text-transform: uppercase;
+    padding: 6px 8px;
+    border-radius: 999px;
+  }
+  nav a.active{
+    color:#111;
+    background: #f3f4f6;
+  }
+
+  /* ===== Mosaic hero ===== */
+  .hero{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px 16px 24px;
+  }
+
+  .mosaic{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    align-items: stretch;
+  }
+  .tile{
+    position:relative;
+    border-radius: 4px;
+    overflow:hidden;
+    min-height: 420px;
+    background: #f3f4f6;
+    cursor:pointer;
+  }
+  .tile img{
+    width:100%; height:100%;
+    object-fit: cover;
+    display:block;
+    transform: scale(1.02);
+    transition: transform .35s ease;
+  }
+  .tile:hover img{ transform: scale(1.08); }
+
+  /* subtle bottom gradient for text */
+  .tile::after{
+    content:"";
+    position:absolute;
+    left:0;right:0;bottom:0;
+    height: 46%;
+    background: linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,0));
+    pointer-events:none;
+  }
+  .caption{
+    position:absolute;
+    left:14px;
+    bottom:14px;
+    color:#fff;
+    z-index:2;
+  }
+  .caption .t{
+    font-weight:900;
+    letter-spacing:.06em;
+    text-transform: uppercase;
+    font-size: 13px;
+  }
+  .caption .s{
+    margin-top:6px;
+    font-size: 12px;
+    opacity:.92;
+  }
+
+  /* little compass marker (like your screenshot center icon) */
+  .marker{
+    position:absolute;
+    left:50%;
+    top: 0;
+    transform: translate(-50%, -50%);
+    width:42px;height:42px;
+    border-radius:999px;
+    background:#fff;
+    border:1px solid var(--line);
+    display:grid;
+    place-items:center;
+    box-shadow: 0 10px 20px rgba(0,0,0,.12);
+    z-index:3;
+  }
+  .marker span{ font-size: 18px; }
+
+  /* ===== Mobile ===== */
+  @media (max-width: 980px){
+    .mosaic{
+      grid-template-columns: 1fr 1fr;
+    }
+    .tile{ min-height: 320px; }
+  }
+  @media (max-width: 560px){
+    .mosaic{
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .tile{ min-height: 300px; border-radius: 10px; }
+    .marker{ display:none; }
+  }
+
+  /* ===== Sections (anchors) ===== */
+  section{
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 26px 16px 60px;
+    border-top: 1px solid var(--line);
+  }
+  h2{
+    margin: 0 0 10px;
+    font-size: 18px;
+    letter-spacing:.02em;
+  }
+  p{ margin: 6px 0; color: var(--muted); line-height: 1.6; }
+</style>
+</head>
+
+<body>
+<header>
+  <div class="top">
+    <div class="icons">
+      <div class="iconBtn" title="Flights">✈️</div>
+      <div class="iconBtn" title="Stays">🧳</div>
+      <div class="iconBtn" title="World">🌍</div>
+    </div>
+    <div class="brand">JERRY TRIP • OKINAWA 2026</div>
+  </div>
+
+  <nav id="nav">
+    <a href="#home" class="active">HOME</a>
+    <a href="#about">ABOUT</a>
+    <a href="#plan">PLAN</a>
+    <a href="#spots">SPOTS</a>
+    <a href="#air">AIR TICKET</a>
+    <a href="#contact">CONNECT</a>
+  </nav>
+</header>
+
+<main id="home" class="hero">
+  <div style="position:relative;">
+    <div class="marker"><span>🧭</span></div>
+
+    <div class="mosaic">
+      <div class="tile" data-go="#plan">
+        <!-- 你可換成沖繩海面照片 -->
+        <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80" alt="beach" />
+        <div class="caption">
+          <div class="t">BEACH</div>
+          <div class="s">6/3–6/7｜海景放空路線</div>
+        </div>
+      </div>
+
+      <div class="tile" data-go="#spots">
+        <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=1200&q=80" alt="cruise" />
+        <div class="caption">
+          <div class="t">FOOD</div>
+          <div class="s">蝦蝦飯 & 海邊甜點</div>
+        </div>
+      </div>
+
+      <div class="tile" data-go="#plan">
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80" alt="mountain" />
+        <div class="caption">
+          <div class="t">TRIP PLAN</div>
+          <div class="s">Day 1–Day 5 行程滑動版</div>
+        </div>
+      </div>
+
+      <div class="tile" data-go="#air">
+        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80" alt="air" />
+        <div class="caption">
+          <div class="t">AIR TICKET</div>
+          <div class="s">出入境 & 還車提醒</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<section id="about">
+  <h2>About</h2>
+  <p>7位大人、自駕為主。住宿：URUUMI ONNA POOL VILLA。</p>
+</section>
+
+<section id="plan">
+  <h2>Plan</h2>
+  <p>這裡等你把「Day1–Day5 那套滑動行程」貼回來（我可以幫你整合）。</p>
+</section>
+
+<section id="spots">
+  <h2>Spots</h2>
+  <p>青洞、浜辺の茶屋、古宇利島、KOURI SHRIMP…（可加 Google Maps 連結）</p>
+</section>
+
+<section id="air">
+  <h2>Air Ticket</h2>
+  <p>你也可以放航班資訊、集合時間、還車注意事項。</p>
+</section>
+
+<section id="contact">
+  <h2>Connect</h2>
+  <p>可以放團員群組連結、緊急聯絡資訊、租車公司資訊。</p>
+</section>
+
+<script>
+  // Click tile to scroll to section
+  document.querySelectorAll(".tile").forEach(t => {
+    t.addEventListener("click", () => {
+      const go = t.getAttribute("data-go");
+      const el = document.querySelector(go);
+      if(el) el.scrollIntoView({behavior:"smooth", block:"start"});
+    });
+  });
+
+  // Active nav highlight on click
+  const nav = document.getElementById("nav");
+  nav.querySelectorAll("a").forEach(a => {
+    a.addEventListener("click", () => {
+      nav.querySelectorAll("a").forEach(x => x.classList.remove("active"));
+      a.classList.add("active");
+    });
+  });
+</script>
+</body>
+</html>
