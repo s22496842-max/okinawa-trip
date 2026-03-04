@@ -1,170 +1,303 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Okinawa Trip 2026</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Okinawa 2026｜Jerry Trip</title>
 
 <style>
-body{
-  margin:0;
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
-  background:#f5f6f8;
-  color:#222;
-}
+  :root{
+    --text:#111827;
+    --muted:#6b7280;
+    --line:#e5e7eb;
+    --bg:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, "Noto Sans TC","PingFang TC","Microsoft JhengHei", sans-serif;
+    color:var(--text);
+    background:var(--bg);
+  }
 
-header{
-  text-align:center;
-  padding:40px 20px 10px;
-  font-weight:800;
-  letter-spacing:.12em;
-}
+  /* ===== Top header ===== */
+  header{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(255,255,255,.86);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .top{
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 14px 16px 10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    gap:10px;
+  }
+  .icons{
+    display:flex;
+    gap:10px;
+  }
+  .iconBtn{
+    width:38px;height:38px;
+    border-radius:8px;
+    border:1px solid var(--line);
+    background:#fff;
+    display:grid;
+    place-items:center;
+    cursor:pointer;
+    user-select:none;
+    transition: transform .12s ease;
+  }
+  .iconBtn:hover{ transform: translateY(-1px); }
+  .brand{
+    font-weight:800;
+    letter-spacing:.08em;
+    font-size: 14px;
+    color:#111;
+  }
 
-.villa{
-  max-width:1100px;
-  margin:20px auto;
-  border-radius:14px;
-  overflow:hidden;
-  box-shadow:0 10px 25px rgba(0,0,0,.12);
-}
+  nav{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    gap:26px;
+    padding: 10px 10px 14px;
+    flex-wrap:wrap;
+    border-top: 1px solid var(--line);
+  }
+  nav a{
+    text-decoration:none;
+    color: var(--muted);
+    font-weight:700;
+    font-size: 12px;
+    letter-spacing:.08em;
+    text-transform: uppercase;
+    padding: 6px 8px;
+    border-radius: 999px;
+  }
+  nav a.active{
+    color:#111;
+    background: #f3f4f6;
+  }
 
-.villa img{
-  width:100%;
-  display:block;
-}
+  /* ===== Mosaic hero ===== */
+  .hero{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px 16px 24px;
+  }
 
-.villa .info{
-  padding:20px;
-  background:#fff;
-}
+  .mosaic{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    align-items: stretch;
+  }
+  .tile{
+    position:relative;
+    border-radius: 4px;
+    overflow:hidden;
+    min-height: 420px;
+    background: #f3f4f6;
+    cursor:pointer;
+  }
+  .tile img{
+    width:100%; height:100%;
+    object-fit: cover;
+    display:block;
+    transform: scale(1.02);
+    transition: transform .35s ease;
+  }
+  .tile:hover img{ transform: scale(1.08); }
 
-.villa .info h2{
-  margin:0 0 6px;
-}
+  /* subtle bottom gradient for text */
+  .tile::after{
+    content:"";
+    position:absolute;
+    left:0;right:0;bottom:0;
+    height: 46%;
+    background: linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,0));
+    pointer-events:none;
+  }
+  .caption{
+    position:absolute;
+    left:14px;
+    bottom:14px;
+    color:#fff;
+    z-index:2;
+  }
+  .caption .t{
+    font-weight:900;
+    letter-spacing:.06em;
+    text-transform: uppercase;
+    font-size: 13px;
+  }
+  .caption .s{
+    margin-top:6px;
+    font-size: 12px;
+    opacity:.92;
+  }
 
-.planWrap{
-  display:flex;
-  gap:20px;
-  overflow-x:auto;
-  padding:20px;
-}
+  /* little compass marker (like your screenshot center icon) */
+  .marker{
+    position:absolute;
+    left:50%;
+    top: 0;
+    transform: translate(-50%, -50%);
+    width:42px;height:42px;
+    border-radius:999px;
+    background:#fff;
+    border:1px solid var(--line);
+    display:grid;
+    place-items:center;
+    box-shadow: 0 10px 20px rgba(0,0,0,.12);
+    z-index:3;
+  }
+  .marker span{ font-size: 18px; }
 
-.dayCard{
-  min-width:320px;
-  background:#fff;
-  border-radius:16px;
-  box-shadow:0 8px 20px rgba(0,0,0,.08);
-  padding:20px;
-}
+  /* ===== Mobile ===== */
+  @media (max-width: 980px){
+    .mosaic{
+      grid-template-columns: 1fr 1fr;
+    }
+    .tile{ min-height: 320px; }
+  }
+  @media (max-width: 560px){
+    .mosaic{
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .tile{ min-height: 300px; border-radius: 10px; }
+    .marker{ display:none; }
+  }
 
-.dayCard h3{
-  margin:0 0 10px;
-}
-
-.route{
-  font-weight:600;
-  margin-bottom:12px;
-}
-
-details{
-  border:1px solid #e4e6ea;
-  border-radius:10px;
-  padding:10px;
-  margin-bottom:10px;
-}
-
-summary{
-  font-weight:700;
-  cursor:pointer;
-}
-
-.choice{
-  display:flex;
-  justify-content:space-between;
-  padding:6px 0;
-}
-
-.map{
-  text-decoration:none;
-}
+  /* ===== Sections (anchors) ===== */
+  section{
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 26px 16px 60px;
+    border-top: 1px solid var(--line);
+  }
+  h2{
+    margin: 0 0 10px;
+    font-size: 18px;
+    letter-spacing:.02em;
+  }
+  p{ margin: 6px 0; color: var(--muted); line-height: 1.6; }
 </style>
 </head>
 
 <body>
+<header>
+  <div class="top">
+    <div class="icons">
+      <div class="iconBtn" title="Flights">✈️</div>
+      <div class="iconBtn" title="Stays">🧳</div>
+      <div class="iconBtn" title="World">🌍</div>
+    </div>
+    <div class="brand">JERRY TRIP • OKINAWA 2026</div>
+  </div>
 
-<header>OKINAWA TRIP</header>
+  <nav id="nav">
+    <a href="#home" class="active">HOME</a>
+    <a href="#about">ABOUT</a>
+    <a href="#plan">PLAN</a>
+    <a href="#spots">SPOTS</a>
+    <a href="#information">INFORMATION</a>
+    <a href="#contact">CONNECT</a>
+  </nav>
+</header>
 
-<section class="villa">
-<img src="uruumi_villa.jpg" alt="URUUMI ONNA POOL VILLA">
-<div class="info">
-<h2>URUUMI ONNA POOL VILLA</h2>
-Stay 6/3 – 6/6 • Onna Okinawa
-<br>
-<a href="https://www.uruumi.jp/en/" target="_blank">Official Website</a>
-</div>
+<main id="home" class="hero">
+  <div style="position:relative;">
+    <div class="marker"><span>🧭</span></div>
+
+    <div class="mosaic">
+      <div class="tile" data-go="#plan">
+        <!-- 你可換成沖繩海面照片 -->
+        <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80" alt="beach" />
+        <div class="caption">
+          <div class="t">BEACH</div>
+          <div class="s">6/3–6/7｜海景放空路線</div>
+        </div>
+      </div>
+
+      <div class="tile" data-go="#spots">
+        <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=1200&q=80" alt="cruise" />
+        <div class="caption">
+          <div class="t">FOOD</div>
+          <div class="s">蝦蝦飯 & 海邊甜點</div>
+        </div>
+      </div>
+
+      <div class="tile" data-go="#plan">
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80" alt="mountain" />
+        <div class="caption">
+          <div class="t">TRIP PLAN</div>
+          <div class="s">Day 1–Day 5 行程滑動版</div>
+        </div>
+      </div>
+
+      <div class="tile" data-go="#information">
+        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80" alt="air" />
+        <div class="caption">
+          <div class="t">INFORMATION</div>
+          <div class="s">Flight • Rental • Tips</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<section id="about">
+  <h2>About</h2>
+  <p>7位大人、自駕為主。住宿：URUUMI ONNA POOL VILLA。</p>
 </section>
 
-<section class="planWrap">
-
-<div class="dayCard">
-<h3>Day 1 | 06/03</h3>
-<div class="route">那霸機場 → 國際通 → Costco → 回機場接人 → 恩納 Villa</div>
-
-<details open>
-<summary>📍 景點</summary>
-<div class="choice">Naha Airport <a class="map" target="_blank" href="https://maps.google.com/?q=Naha Airport">Map</a></div>
-<div class="choice">Kokusai Dori <a class="map" target="_blank" href="https://maps.google.com/?q=Kokusai Dori Naha">Map</a></div>
-<div class="choice">Costco Naha <a class="map" target="_blank" href="https://maps.google.com/?q=Costco Naha">Map</a></div>
-</details>
-
-<details>
-<summary>🍽 午餐</summary>
-<div class="choice">JACK'S STEAK HOUSE <a class="map" target="_blank" href="https://maps.google.com/?q=Jacks Steak House Naha">Map</a></div>
-<div class="choice">通堂拉麵 <a class="map" target="_blank" href="https://maps.google.com/?q=Dando Ramen Oroku">Map</a></div>
-<div class="choice">88牛排 <a class="map" target="_blank" href="https://maps.google.com/?q=Steakhouse 88 Kokusai">Map</a></div>
-</details>
-</div>
-
-<div class="dayCard">
-<h3>Day 2 | 06/04</h3>
-<div class="route">恩納 → 美麗海水族館 → 古宇利島 → 回恩納</div>
-
-<details open>
-<summary>📍 景點</summary>
-<div class="choice">Churaumi Aquarium <a class="map" target="_blank" href="https://maps.google.com/?q=Okinawa Churaumi Aquarium">Map</a></div>
-<div class="choice">Kouri Bridge <a class="map" target="_blank" href="https://maps.google.com/?q=Kouri Bridge">Map</a></div>
-</details>
-
-<details>
-<summary>🍽 午餐</summary>
-<div class="choice">Kouri Shrimp <a class="map" target="_blank" href="https://maps.google.com/?q=Kouri Shrimp">Map</a></div>
-<div class="choice">Shrimp Wagon Yoshi <a class="map" target="_blank" href="https://maps.google.com/?q=Shrimp Wagon Yoshi">Map</a></div>
-</details>
-</div>
-
-<div class="dayCard">
-<h3>Day 3 | 06/05</h3>
-<div class="route">萬座毛 → 青之洞窟 → 恩納</div>
-
-<details open>
-<summary>📍 景點</summary>
-<div class="choice">Manzamo <a class="map" target="_blank" href="https://maps.google.com/?q=Manzamo Cape">Map</a></div>
-<div class="choice">Blue Cave <a class="map" target="_blank" href="https://maps.google.com/?q=Blue Cave Okinawa">Map</a></div>
-</details>
-</div>
-
-<div class="dayCard">
-<h3>Day 4 | 06/06</h3>
-<div class="route">恩納 → 美國村</div>
-
-<details open>
-<summary>📍 景點</summary>
-<div class="choice">American Village <a class="map" target="_blank" href="https://maps.google.com/?q=American Village Chatan">Map</a></div>
-</details>
-</div>
-
+<section id="plan">
+  <h2>Plan</h2>
+  <p>這裡等你把「Day1–Day5 那套滑動行程」貼回來（我可以幫你整合）。</p>
 </section>
 
+<section id="spots">
+  <h2>Spots</h2>
+  <p>青洞、浜辺の茶屋、古宇利島、KOURI SHRIMP…（可加 Google Maps 連結）</p>
+</section>
+
+<section id="information">
+  <h2>Information</h2>
+  <p>你也可以放航班資訊、集合時間、還車注意事項。</p>
+</section>
+
+<section id="contact">
+  <h2>Connect</h2>
+  <p>可以放團員群組連結、緊急聯絡資訊、租車公司資訊。</p>
+</section>
+
+<script>
+  // Click tile to scroll to section
+  document.querySelectorAll(".tile").forEach(t => {
+    t.addEventListener("click", () => {
+      const go = t.getAttribute("data-go");
+      const el = document.querySelector(go);
+      if(el) el.scrollIntoView({behavior:"smooth", block:"start"});
+    });
+  });
+
+  // Active nav highlight on click
+  const nav = document.getElementById("nav");
+  nav.querySelectorAll("a").forEach(a => {
+    a.addEventListener("click", () => {
+      nav.querySelectorAll("a").forEach(x => x.classList.remove("active"));
+      a.classList.add("active");
+    });
+  });
+</script>
 </body>
 </html>
