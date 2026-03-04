@@ -190,6 +190,131 @@
     letter-spacing:.02em;
   }
   p{ margin: 6px 0; color: var(--muted); line-height: 1.6; }
+
+  /* ===== Upgrade: Countdown + Pills + Plan scroller ===== */
+  .countdown{
+    margin-top:-4px;
+    font-size:12px;
+    font-weight:800;
+    color: #111;
+    letter-spacing:.04em;
+    opacity:.85;
+  }
+  .subnote{
+    font-size:12px;
+    color: var(--muted);
+    margin-top:6px;
+  }
+  .pillRow{ display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+  .pill{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:10px 12px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    background:#fff;
+    font-weight:800;
+    font-size:12px;
+    color:#111;
+  }
+  .pill a{ color:inherit; text-decoration:none; }
+  .grid2{
+    display:grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap:14px;
+    margin-top:14px;
+  }
+  @media (max-width: 860px){
+    .grid2{ grid-template-columns: 1fr; }
+  }
+  .cardBox{
+    border:1px solid var(--line);
+    background:#fff;
+    border-radius:14px;
+    overflow:hidden;
+  }
+  .cardBox img{ width:100%; height:220px; object-fit:cover; display:block; }
+  .cardBody{ padding:14px; }
+  .cardTitle{ font-weight:900; letter-spacing:.02em; margin:0; }
+  .cardText{ margin:8px 0 0; color:var(--muted); line-height:1.6; font-size:13px; }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:12px;
+    padding:10px 12px;
+    border-radius:12px;
+    border:1px solid var(--line);
+    background:#111827;
+    color:#fff;
+    text-decoration:none;
+    font-weight:900;
+    font-size:12px;
+  }
+  .btn.secondary{
+    background:#fff;
+    color:#111;
+  }
+
+  /* Plan scroller (mobile swipe) */
+  .planWrap{ margin-top:12px; }
+  .planScroller{
+    display:flex;
+    gap:12px;
+    overflow-x:auto;
+    padding: 4px 2px 10px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .planScroller::-webkit-scrollbar{ height: 8px; }
+  .planScroller::-webkit-scrollbar-thumb{ background:#e5e7eb; border-radius:999px; }
+  .dayCard{
+    min-width: 320px;
+    max-width: 360px;
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    border:1px solid var(--line);
+    background:#fff;
+    border-radius:14px;
+    overflow:hidden;
+  }
+  @media (max-width: 420px){
+    .dayCard{ min-width: 88vw; }
+  }
+  .dayHead{
+    padding:12px 14px;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:10px;
+  }
+  .dayHead .d{ font-weight:900; letter-spacing:.02em; }
+  .dayHead .date{ font-size:12px; color:var(--muted); font-weight:800; }
+  .dayBody{ padding: 12px 14px 14px; }
+  .slot{ margin: 10px 0; }
+  .slot .t{ font-weight:900; font-size:12px; letter-spacing:.06em; text-transform:uppercase; }
+  .slot .n{ margin-top:4px; color:#111; font-weight:800; }
+  .slot .m{ margin-top:6px; font-size:13px; color:var(--muted); line-height:1.55; }
+  .mapLink{
+    display:inline-flex;
+    gap:8px;
+    align-items:center;
+    margin-top:8px;
+    padding:8px 10px;
+    border-radius:10px;
+    border:1px solid var(--line);
+    text-decoration:none;
+    font-weight:900;
+    font-size:12px;
+    color:#111;
+    background:#fff;
+  }
+  .hint{
+    margin-top:10px;
+    font-size:12px;
+    color:var(--muted);
+  }
+
 </style>
 </head>
 
@@ -202,6 +327,7 @@
       <div class="iconBtn" title="World">🌍</div>
     </div>
     <div class="brand">JERRY TRIP • OKINAWA 2026</div>
+    <div id="countdown" class="countdown">⏳ 距離 6/3 出發還有：-- 天</div>
   </div>
 
   <nav id="nav">
@@ -257,22 +383,167 @@
 
 <section id="about">
   <h2>About</h2>
-  <p>7位大人、自駕為主。住宿：URUUMI ONNA POOL VILLA。</p>
+  <p>7位大人、自駕為主。住宿：<b>URUUMI ONNA POOL VILLA</b>。行程範圍：<b>2026/06/03–06/07</b>。</p>
+
+  <div class="pillRow">
+    <div class="pill">🚗 自駕</div>
+    <div class="pill">👥 7 Adults</div>
+    <div class="pill">🏖 Onna</div>
+    <div class="pill">🤿 Blue Cave</div>
+    <div class="pill">🦐 KOURI SHRIMP</div>
+  </div>
+
+  <div class="grid2">
+    <div class="cardBox">
+      <img alt="Villa" src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1600&q=80">
+      <div class="cardBody">
+        <p class="cardTitle">URUUMI ONNA POOL VILLA</p>
+        <p class="cardText">包棟泳池 Villa｜主打「海景放鬆」。之後你把真實住宿的地圖連結/照片給我，我可以直接換成你們的版本。</p>
+        <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=URUUMI+ONNA+POOL+VILLA">📍 Open in Google Maps</a>
+      </div>
+    </div>
+
+    <div class="cardBox">
+      <div class="cardBody">
+        <p class="cardTitle">Quick Tips</p>
+        <p class="cardText">
+          ✅ 7人用餐：建議先訂位或拆兩桌<br>
+          ✅ 浮潛：可分兩梯次更順<br>
+          ✅ 回程日：保留還車與機場時間緩衝
+        </p>
+        <a class="btn secondary" href="#information">➡️ Go to Information</a>
+        <div class="subnote">（你之後把班機資訊貼來，我會幫你做成漂亮的資訊卡。）</div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section id="plan">
   <h2>Plan</h2>
-  <p>這裡等你把「Day1–Day5 那套滑動行程」貼回來（我可以幫你整合）。</p>
+  <p>手機可左右滑動（桌機也可用滑鼠滾輪橫向滑）。每個景點都有 Google 地圖連結。</p>
+
+  <div class="planWrap">
+    <div class="planScroller" aria-label="Day plans scroller">
+      <article class="dayCard">
+        <div class="dayHead"><div class="d">Day 1</div><div class="date">06/03｜Naha</div></div>
+        <div class="dayBody">
+          <div class="slot">
+            <div class="t">Afternoon</div>
+            <div class="n">那霸機場（取車）✈️</div>
+            <div class="m">抵達後取車／集合，先補水和防曬。</div>
+            <a class="mapLink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Naha%20Airport">📍 Maps</a>
+          </div>
+          <div class="slot">
+            <div class="t">Evening</div>
+            <div class="n">國際通 🛍️</div>
+            <div class="m">逛街＋伴手禮，晚餐建議先訂位。</div>
+            <a class="mapLink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Kokusai%20Dori%20Naha">📍 Maps</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="dayCard">
+        <div class="dayHead"><div class="d">Day 2</div><div class="date">06/04｜Chatan → Onna</div></div>
+        <div class="dayBody">
+          <div class="slot">
+            <div class="t">Midday</div>
+            <div class="n">美國村 🌈</div>
+            <div class="m">咖啡、逛街、海景步道。</div>
+            <a class="mapLink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=American%20Village%20Chatan">📍 Maps</a>
+          </div>
+          <div class="slot">
+            <div class="t">Afternoon</div>
+            <div class="n">URUUMI ONNA POOL VILLA 🏖</div>
+            <div class="m">Check-in，泳池放空時間。</div>
+            <a class="mapLink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=URUUMI+ONNA+POOL+VILLA">📍 Maps</a>
+          </div>
+          <div class="slot">
+            <div class="t">Sunset</div>
+            <div class="n">萬座毛 🌅</div>
+            <div class="m">夕陽點之一，散步拍照。</div>
+            <a class="mapLink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Cape%20Manzamo">📍 Maps</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="dayCard">
+        <div class="dayHead"><div class="d">Day 3</div><div class="date">06/05｜Blue Cave</div></div>
+        <div class="dayBody">
+          <div class="slot">
+            <div class="t">Morning</div>
+            <div class="n">真榮田岬 / 青洞 🤿</div>
+            <div class="m">7人建議分兩梯次，玩得更舒服。</div>
+            <a class="mapLink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Cape%20Maeda%20Blue%20Cave%20Okinawa">📍 Maps</a>
+          </div>
+          <div class="slot">
+            <div class="t">Afternoon</div>
+            <div class="n">浜辺の茶屋 🍮</div>
+            <div class="m">海邊甜點＋看海放空。</div>
+            <a class="mapLink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hamabe%20no%20Chaya%20Okinawa">📍 Maps</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="dayCard">
+        <div class="dayHead"><div class="d">Day 4</div><div class="date">06/06｜Kouri</div></div>
+        <div class="dayBody">
+          <div class="slot">
+            <div class="t">Morning</div>
+            <div class="n">古宇利大橋 🌊</div>
+            <div class="m">自駕必跑，團照點。</div>
+            <a class="mapLink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Kouri%20Bridge%20Okinawa">📍 Maps</a>
+          </div>
+          <div class="slot">
+            <div class="t">Lunch</div>
+            <div class="n">KOURI SHRIMP 🦐</div>
+            <div class="m">建議避開尖峰或提早到。</div>
+            <a class="mapLink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=KOURI%20SHRIMP%20Okinawa">📍 Maps</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="dayCard">
+        <div class="dayHead"><div class="d">Day 5</div><div class="date">06/07｜Return</div></div>
+        <div class="dayBody">
+          <div class="slot">
+            <div class="t">Morning</div>
+            <div class="n">Villa 慢活早餐 🏖</div>
+            <div class="m">整理行李、退房前再拍一輪。</div>
+            <a class="mapLink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=URUUMI+ONNA+POOL+VILLA">📍 Maps</a>
+          </div>
+          <div class="slot">
+            <div class="t">Afternoon</div>
+            <div class="n">還車 → 那霸機場 ✈️</div>
+            <div class="m">預留緩衝時間，安心回程。</div>
+            <a class="mapLink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Naha%20Airport">📍 Maps</a>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="hint">📱 小提示：手機左右滑看 Day 1–Day 5（桌機也可以觸控板/Shift+滾輪）。</div>
+  </div>
 </section>
 
 <section id="spots">
   <h2>Spots</h2>
-  <p>青洞、浜辺の茶屋、古宇利島、KOURI SHRIMP…（可加 Google Maps 連結）</p>
+  <p>你們這趟的必去點（點一下直接開 Google Maps）：</p>
+  <div class="pillRow">
+    <div class="pill"><a target="_blank" href="https://www.google.com/maps/search/?api=1&query=Cape%20Maeda%20Blue%20Cave%20Okinawa">🤿 青洞</a></div>
+    <div class="pill"><a target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hamabe%20no%20Chaya%20Okinawa">🍮 浜辺の茶屋</a></div>
+    <div class="pill"><a target="_blank" href="https://www.google.com/maps/search/?api=1&query=KOURI%20SHRIMP%20Okinawa">🦐 KOURI SHRIMP</a></div>
+    <div class="pill"><a target="_blank" href="https://www.google.com/maps/search/?api=1&query=Cape%20Manzamo">🌅 萬座毛</a></div>
+    <div class="pill"><a target="_blank" href="https://www.google.com/maps/search/?api=1&query=American%20Village%20Chatan">🌈 美國村</a></div>
+  </div>
 </section>
 
 <section id="information">
   <h2>Information</h2>
-  <p>你也可以放航班資訊、集合時間、還車注意事項。</p>
+  <p>這裡之後放「班機資訊 / 租車 / 集合提醒」。你把航班號與時間貼給我，我會幫你排成一張很漂亮的 Flight 卡片。</p>
+  <div class="pillRow">
+    <div class="pill">✈️ Flight：待補</div>
+    <div class="pill">🚗 Rental：待補</div>
+    <div class="pill">🏡 Stay：URUUMI ONNA POOL VILLA</div>
+  </div>
 </section>
 
 <section id="contact">
@@ -299,5 +570,37 @@
     });
   });
 </script>
+
+<script>
+  // ===== Countdown to trip start (Asia/Taipei) =====
+  (function(){
+    const el = document.getElementById("countdown");
+    if(!el) return;
+
+    // Trip start: 2026-06-03 (local time)
+    const tripStart = new Date(2026, 5, 3, 0, 0, 0);
+
+    function daysBetween(a, b){
+      const ms = 24*60*60*1000;
+      const da = new Date(a.getFullYear(), a.getMonth(), a.getDate());
+      const db = new Date(b.getFullYear(), b.getMonth(), b.getDate());
+      return Math.round((db - da) / ms);
+    }
+
+    function updateCountdown(){
+      const now = new Date();
+      if(now < tripStart){
+        const d = daysBetween(now, tripStart);
+        el.textContent = `⏳ 距離 6/3 出發還有：${d} 天`;
+      }else{
+        el.textContent = `✨ 旅程進行中 / 已結束：回憶模式 ON`;
+      }
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 60 * 1000);
+  })();
+</script>
+
 </body>
 </html>
